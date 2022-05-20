@@ -1,7 +1,10 @@
 #!/bin/sh
 sudo apt-get update
 sudo apt-get install -y udiskie
+sleep 5
 udiskie-mount -a
+sleep 5
+sudo apt-get install -y wget
 sudo apt-get install -y git
 sudo apt-get install -y curl
 sudo apt-get install -y xorg
@@ -29,12 +32,22 @@ sudo apt-get install -y kodi-inputstream-adaptive libnss3
 sudo apt-get install -y lxterminal
 sudo apt-get install -y dillo
 sudo apt-get install -y midori
+sudo apt-get clean
+sleep 5
+udiskie-mount -a
+sleep 5
 
+#ADD TO tty group
+sudo adduser "$USER" tty
+sudo adduser "$USER" video
+sudo adduser "$USER" bluetooth
 
 udiskie-mount -a
+sleep 5
+sudo ln -sv /media/vv/ /media/pi
+sudo ln -sv /media/pi/ /media/vv
 sudo ln -sv /media/pi/1/ /a
 sudo ln -sv /media/pi/K/ /k
-sudo ln -sv /media/pi/ /media/vv
 ln -sv /media/vv/1/y/y/u/  ~/u
 ln -sv /media/vv/1/y/y/p/  ~/p
 ln -sv /media/pi/1/ /z/x
@@ -116,8 +129,6 @@ After=network.target
 Type=oneshot
 ExecStart=/usr/bin/udiskie-mount -a
 RemainAfterExit=yes
-User=pi
-Group=pi  
 
 [Install]
 WantedBy=multi-user.target
@@ -138,9 +149,9 @@ ExecStart=/usr/bin/java -Djava.awt.headless=true -jar /opt/jdownloader/JDownload
 #PID FILE FOR 2020 VERSION
 PIDFile=/opt/jdownloader/JDownloader.pid
 RemainAfterExit=yes
-User=pi
+User='$USER' 
 # Should be owner of /opt/jdownloader
-Group=pi  
+Group='$USER'   
 # Should be owner of /opt/jdownloader
 
 [Install]
@@ -155,7 +166,8 @@ sh ~/u/installers/psrpiMEGArepository.sh
 sh ~/u/installers/rpibluealsa2022.sh
 sh ~/u/installers/rpipulseaudio.sh
 sh ~/u/installers/qbittorrent-cli_install.sh
-sh ~/u/installers/jd.sh
 #####################################################################################
 sh ~/u/installers/cred.sh
 sh ~/u/installers/dotstow.sh
+sh ~/u/installers/bluetoothconnect.sh
+sh ~/u/installers/jd.sh
