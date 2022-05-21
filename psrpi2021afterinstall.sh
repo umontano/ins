@@ -1,4 +1,6 @@
 sudo apt-get install -y xutils-dev 
+
+#OMXPLAYER LIBRARY MISSING
 sudo apt-get install -y libbrcmGLESv2
 
 #TO INSTALL SUCKLESS TERMINAL ST, #add Xlib.h
