@@ -1,3 +1,8 @@
+
+#TO INSTALL SUCKLESS TERMINAL ST, #add Xlib.h
+sudo apt install libx11-dev
+exit 0
+
 #!/bin/sh
 sudo apt-get update
 sudo apt-get install -y udiskie
