@@ -2,6 +2,16 @@
 #TO INSTALL SUCKLESS TERMINAL ST, #add Xlib.h
 sudo apt-get install -y libx11-dev
 sudo apt-get install -y libghc-x11-xft-dev
+#####################################################################################
+#Package fontconfig was not found in the pkg-config search path.
+#Perhaps you should add the directory containing `fontconfig.pc'
+#to the PKG_CONFIG_PATH environment variable
+cd ~/
+git clone git://git.suckless.org/st
+cd ~/st/
+make
+sudo make install
+##############################################
 exit 0
 
 #!/bin/sh
@@ -66,16 +76,6 @@ ln -sv /media/pi/K/ /z/K
 ln -sv /media/pi/ /z/m
 sudo chmod -R 777 /z
 
-#####################################################################################
-#Package fontconfig was not found in the pkg-config search path.
-#Perhaps you should add the directory containing `fontconfig.pc'
-#to the PKG_CONFIG_PATH environment variable
-cd ~/
-git clone git://git.suckless.org/st
-cd ~/st/
-make
-sudo make install
-##############################################
 
 
 #####################################################################################
