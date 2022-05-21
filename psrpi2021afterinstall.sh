@@ -1,5 +1,5 @@
 sudo apt-get install -y xutils-dev 
-
+sudo apt-get install -y libbrcmGLESv2
 
 #TO INSTALL SUCKLESS TERMINAL ST, #add Xlib.h
 sudo apt-get install -y libx11-dev
