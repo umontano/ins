@@ -1,6 +1,6 @@
 
 #TO INSTALL SUCKLESS TERMINAL ST, #add Xlib.h
-sudo apt install libx11-dev
+sudo apt-get install -y libx11-dev
 exit 0
 
 #!/bin/sh
