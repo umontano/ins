@@ -1,3 +1,5 @@
+sudo apt-get install -y xutils-dev 
+
 
 #TO INSTALL SUCKLESS TERMINAL ST, #add Xlib.h
 sudo apt-get install -y libx11-dev
@@ -9,6 +11,18 @@ sudo apt-get install -y libghc-x11-xft-dev
 cd ~/
 git clone git://git.suckless.org/st
 cd ~/st/
+make
+sudo make install
+##############################################
+cd ~/
+git clone git://git.suckless.org/dwm
+cd ~/dwm/
+make
+sudo make install
+##############################################
+cd ~/
+git clone git://git.suckless.org/dmenu
+cd ~/dmenu/
 make
 sudo make install
 ##############################################
