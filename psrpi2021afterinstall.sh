@@ -1,10 +1,10 @@
 
 #OMXPLAYER MISSING LIBRARY 
-sudo apt-get install -y libbrcmGLESv2
+#sudo apt-get install -y libbrcmGLESv2
 
 #TO INSTALL SUCKLESS TERMINAL ST, #add Xlib.h
-sudo apt-get install -y libx11-dev
-sudo apt-get install -y libghc-x11-xft-dev
+#sudo apt-get install -y libx11-dev
+#sudo apt-get install -y libghc-x11-xft-dev
 #####################################################################################
 #Package fontconfig was not found in the pkg-config search path.
 #Perhaps you should add the directory containing `fontconfig.pc'
