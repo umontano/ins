@@ -17,14 +17,14 @@ make
 sudo make install
 ##############################################
 cd ~/
-git clone git://git.suckless.org/dwm
-cd ~/dwm/
+git clone git://git.suckless.org/dmenu
+cd ~/dmenu/
 make
 sudo make install
 ##############################################
 cd ~/
-git clone git://git.suckless.org/dmenu
-cd ~/dmenu/
+git clone git://git.suckless.org/dwm
+cd ~/dwm/
 make
 sudo make install
 ##############################################
