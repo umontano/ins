@@ -1,4 +1,3 @@
-sudo apt-get install -y xutils-dev 
 
 #OMXPLAYER MISSING LIBRARY 
 sudo apt-get install -y libbrcmGLESv2
@@ -13,21 +12,17 @@ sudo apt-get install -y libghc-x11-xft-dev
 cd ~/
 git clone git://git.suckless.org/st
 cd ~/st/
-make clean
-make
-sudo make clean install
+make; sudo make clean install
 ##############################################
 cd ~/
 git clone git://git.suckless.org/dmenu
 cd ~/dmenu/
-make clean
+make; sudo make clean install
 ##############################################
 cd ~/
 git clone git://git.suckless.org/dwm
 cd ~/dwm/
-make clean
-make
-sudo make clean install
+make; sudo make clean install
 ##############################################
 exit 0
 
@@ -40,16 +35,36 @@ sleep 5
 sudo apt-get install -y wget
 sudo apt-get install -y git
 sudo apt-get install -y curl
-sudo apt-get install -y xorg
-sudo apt-get install -y libc6 libx11-6 libxinerama1
-sudo apt-get install -y dwm
-sudo apt-get install -y suckless-tools
+#SUCKLESS
+#sudo apt-get install -y dwm
+#sudo apt-get install -y suckless-tools
 sudo apt-get install -y fontconfig
 sudo apt-get install -y xfonts-terminus
 sudo apt-get install -y raspberrypi-ui-mods
+#X11
+#sudo apt-get install -y xorg
+sudo apt-get install -y libc6 libx11-6 libxinerama1
 sudo apt-get install -y xserver-xorg
 sudo apt-get install -y xinit
+sudo apt-get install -y xutils-dev 
 sudo apt-get install -y x11-xserver-utils
+#COMPILING TOOLS
+sudo apt-get install -y build-essential
+#install dependencies:
+sudo apt-get install -y libtool libtool-bin autoconf automake cmake libncurses5-dev g++
+#make python bindings available:
+sudo apt-get install -y python-dev python-pip python3-dev python3-pip
+#Platform-specific requirements are listed below.
+#Ubuntu / Debian
+sudo apt-get install -y ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
+#CentOS / RHEL / Fedora
+#sudo yum -y install ninja-build libtool autoconf automake cmake gcc gcc-c++ make pkgconfig unzip patch gettext
+#openSUSE
+#sudo zypper install ninja libtool autoconf automake cmake gcc-c++ gettext-tools
+#Arch Linux
+#Alpine Linux
+#apk add build-base cmake automake autoconf libtool pkgconf coreutils curl unzip gettext-tiny-dev
+##############
 sudo apt-get install -y clang
 sudo apt-get install -y tmux
 sudo apt-get install -y fish
