@@ -2,27 +2,27 @@
 #OMXPLAYER MISSING LIBRARY 
 #sudo apt-get install -y libbrcmGLESv2
 
+#####################################################################################
 #TO INSTALL SUCKLESS TERMINAL ST, #add Xlib.h
 #sudo apt-get install -y libx11-dev
 #sudo apt-get install -y libghc-x11-xft-dev
-#####################################################################################
 #Package fontconfig was not found in the pkg-config search path.
 #Perhaps you should add the directory containing `fontconfig.pc'
 #to the PKG_CONFIG_PATH environment variable
 cd ~/
 git clone git://git.suckless.org/st
 cd ~/st/
-make; sudo make clean install
+make clean; make; sudo make clean install
 ##############################################
 cd ~/
 git clone git://git.suckless.org/dmenu
 cd ~/dmenu/
-make; sudo make clean install
+make clean; make; sudo make clean install
 ##############################################
 cd ~/
 git clone git://git.suckless.org/dwm
 cd ~/dwm/
-make; sudo make clean install
+make clean; make; sudo make clean install
 ##############################################
 exit 0
 
