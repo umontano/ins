@@ -1,6 +1,6 @@
 sudo apt-get install -y xutils-dev 
 
-#OMXPLAYER LIBRARY MISSING
+#OMXPLAYER MISSING LIBRARY 
 sudo apt-get install -y libbrcmGLESv2
 
 #TO INSTALL SUCKLESS TERMINAL ST, #add Xlib.h
@@ -13,20 +13,21 @@ sudo apt-get install -y libghc-x11-xft-dev
 cd ~/
 git clone git://git.suckless.org/st
 cd ~/st/
+make clean
 make
-sudo make install
+sudo make clean install
 ##############################################
 cd ~/
 git clone git://git.suckless.org/dmenu
 cd ~/dmenu/
-make
-sudo make install
+make clean
 ##############################################
 cd ~/
 git clone git://git.suckless.org/dwm
 cd ~/dwm/
+make clean
 make
-sudo make install
+sudo make clean install
 ##############################################
 exit 0
 
