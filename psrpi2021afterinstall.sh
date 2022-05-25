@@ -24,7 +24,7 @@ git clone git://git.suckless.org/dwm
 cd ~/dwm/
 make clean; make; sudo make clean install
 ##############################################
-exit 0
+
 
 #!/bin/sh
 sudo apt-get update
