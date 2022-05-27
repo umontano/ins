@@ -1,7 +1,50 @@
-
+#!/bin/sh
+sudo apt-get update
+sudo apt-get install -y udiskie
+sleep 5
+udiskie-mount -a
+sleep 5
+sudo apt-get install -y wget
+sudo apt-get install -y git
+sudo apt-get install -y curl
+sudo apt-get install -y tmux
+sudo apt-get install -y fish
+sudo apt-get install -y stow
+sudo apt-get install -y rclone
+sudo apt-get install -y archivemount
+sudo apt-get install -y lynx
+sudo apt-get install -y vim
+sudo apt-get install -y shellcheck
+sudo apt-get install -y kodi
+sudo apt-get install -y kodi-inputstream-adaptive libnss3
+sudo apt-get install -y lxterminal
+sudo apt-get install -y dillo
+sudo apt-get install -y midori
+#SUCKLESS
+#sudo apt-get install -y dwm
+#sudo apt-get install -y suckless-tools
+sudo apt-get install -y fontconfig
+sudo apt-get install -y xfonts-terminus
+sudo apt-get install -y raspberrypi-ui-mods
+#X11
+#sudo apt-get install -y xorg
+sudo apt-get install -y xserver-xorg
+sudo apt-get install -y xinit
+sudo apt-get install -y xutils-dev 
+sudo apt-get install -y x11-xserver-utils
+sudo apt-get install -y libc6 libx11-6 libxinerama1
+#COMPILING TOOLS
+#sudo apt-get install -y build-essential
+##############
+sleep 5
+udiskie-mount -a
+sleep 5
 #OMXPLAYER MISSING LIBRARY 
-#sudo apt-get install -y libbrcmGLESv2
-
+sudo apt-get install -y libbrcmGLESv2
+sudo apt-get install -y omxplayer
+sleep 5
+udiskie-mount -a
+sleep 5
 #####################################################################################
 #TO INSTALL SUCKLESS TERMINAL ST, #add Xlib.h
 sudo apt-get install -y libx11-dev
@@ -24,62 +67,8 @@ git clone git://git.suckless.org/dwm
 cd ~/dwm/
 make clean; make; sudo make clean install
 ##############################################
-
-
-#!/bin/sh
-sudo apt-get update
-sudo apt-get install -y udiskie
 sleep 5
 udiskie-mount -a
-sleep 5
-sudo apt-get install -y wget
-sudo apt-get install -y git
-sudo apt-get install -y curl
-#SUCKLESS
-#sudo apt-get install -y dwm
-#sudo apt-get install -y suckless-tools
-sudo apt-get install -y fontconfig
-sudo apt-get install -y xfonts-terminus
-sudo apt-get install -y raspberrypi-ui-mods
-#X11
-#sudo apt-get install -y xorg
-sudo apt-get install -y libc6 libx11-6 libxinerama1
-sudo apt-get install -y xserver-xorg
-sudo apt-get install -y xinit
-sudo apt-get install -y xutils-dev 
-sudo apt-get install -y x11-xserver-utils
-#COMPILING TOOLS
-sudo apt-get install -y build-essential
-#install dependencies:
-sudo apt-get install -y libtool libtool-bin autoconf automake cmake libncurses5-dev g++
-#make python bindings available:
-sudo apt-get install -y python-dev python-pip python3-dev python3-pip
-#Platform-specific requirements are listed below.
-#Ubuntu / Debian
-sudo apt-get install -y ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
-#CentOS / RHEL / Fedora
-#sudo yum -y install ninja-build libtool autoconf automake cmake gcc gcc-c++ make pkgconfig unzip patch gettext
-#openSUSE
-#sudo zypper install ninja libtool autoconf automake cmake gcc-c++ gettext-tools
-#Arch Linux
-#Alpine Linux
-#apk add build-base cmake automake autoconf libtool pkgconf coreutils curl unzip gettext-tiny-dev
-##############
-sudo apt-get install -y clang
-sudo apt-get install -y tmux
-sudo apt-get install -y fish
-sudo apt-get install -y stow
-sudo apt-get install -y rclone
-sudo apt-get install -y archivemount
-sudo apt-get install -y lynx
-sudo apt-get install -y vim
-sudo apt-get install -y shellcheck
-sudo apt-get install -y omxplayer
-sudo apt-get install -y kodi
-sudo apt-get install -y kodi-inputstream-adaptive libnss3
-sudo apt-get install -y lxterminal
-sudo apt-get install -y dillo
-sudo apt-get install -y midori
 sudo apt-get clean
 sleep 5
 udiskie-mount -a
@@ -92,20 +81,21 @@ sudo adduser "$USER" bluetooth
 
 udiskie-mount -a
 sleep 5
-sudo ln -sv /media/vv/ /media/pi
-sudo ln -sv /media/pi/ /media/vv
-sudo ln -sv /media/pi/1/ /a
-sudo ln -sv /media/pi/K/ /k
-ln -sv /media/vv/1/y/y/u/  ~/u
-ln -sv /media/vv/1/y/y/p/  ~/p
-ln -sv /media/pi/1/ /z/x
+#sudo ln -sv /media/$USER/ /media/pi
+#sudo ln -sv /media/$USER/ /media/vv
+sudo ln -sv /media/$USER/1/ /a
+sudo ln -sv /media/$USER/K/ /k
+sudo ln -sv /media/$USER/K/ /b
+ln -sv /media/$USER/1/y/y/u/  ~/u
+ln -sv /media/$USER/1/y/y/p/  ~/p
+ln -sv /media/$USER/1/ /z/x
 sudo mkdir /z
 sudo chown "$USER":"$USER" /z
 sudo chmod -R 777 /z
-ln -sv /media/pi/1/ /z/x
-ln -sv /media/pi/1/ /z/1
-ln -sv /media/pi/K/ /z/K
-ln -sv /media/pi/ /z/m
+ln -sv /media/$USER/1/ /z/x
+ln -sv /media/$USER/1/ /z/a
+ln -sv /media/$USER/K/ /z/b
+ln -sv /media/$USER/ /z/m
 sudo chmod -R 777 /z
 
 
@@ -148,64 +138,4 @@ exec dwm
 ############################################################
 
 #####################################################################################
-#r /home/pi/.config/autostart/auto_wpasupp_wireless.desktop mkdir -p ~/.config/autostart/
-mkdir -p ~/.config/autostart/
-echo '[Desktop Entry]
-Type=Application
-Name=udiskiemounter
-Exec=udiskie-mount -a
-StartupNotify=false
-Terminal=false
-' | tee ~/.config/autostart/auto_udiskie.desktop
-
-#UDISKUE SYSTEMD
-echo '[Unit]
-Description=JDownloader Service
-After=network.target
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/udiskie-mount -a
-RemainAfterExit=yes
-
-[Install]
-WantedBy=multi-user.target
-' | sudo tee /etc/systemd/system/udiskie.service
-sudo systemctl enable udiskie.service
-sudo systemctl start udiskie.service
-sudo systemctl status udiskie.service
-
-#r /etc/systemd/system/jdownloader.service
-echo '[Unit]
-Description=JDownloader Service
-After=network.target
-
-[Service]
-#Environment=JD_HOME=/opt/jdownloader
-Type=oneshot
-ExecStart=/usr/bin/java -Djava.awt.headless=true -jar /opt/jdownloader/JDownloader.jar
-#PID FILE FOR 2020 VERSION
-PIDFile=/opt/jdownloader/JDownloader.pid
-RemainAfterExit=yes
-User='$USER' 
-# Should be owner of /opt/jdownloader
-Group='$USER'   
-# Should be owner of /opt/jdownloader
-
-[Install]
-WantedBy=multi-user.target
-' | sudo tee /etc/systemd/system/jdownloader.service
-sudo systemctl enable jdownloader.service
-sudo systemctl start jdownloader.service
-sudo systemctl status jdownloader.service
-#####################################################################################
-#####################################################################################
-sh ~/u/installers/psrpiMEGArepository.sh 
-sh ~/u/installers/rpibluealsa2022.sh
-sh ~/u/installers/rpipulseaudio.sh
-sh ~/u/installers/qbittorrent-cli_install.sh
-#####################################################################################
-sh ~/u/installers/cred.sh
-sh ~/u/installers/dotstow.sh
-sh ~/u/installers/bluetoothconnect.sh
-sh ~/u/installers/jd.sh
+#r /home/$USER/.config/autostart/auto_w
