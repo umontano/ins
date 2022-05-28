@@ -11,8 +11,8 @@ ExecStart=~/auto.sh
 WantedBy=default.target
 ' | sudo tee /etc/systemd/system/automegadiskie.service
 
-echo 0
 
+exit 0
 
 
 
