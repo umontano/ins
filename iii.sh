@@ -1,33 +1,3 @@
-#####################################################################################
-#AUTOSTART MEGADISKIE
-cp -v /media/"$USER"/1/y/y/u/installers/auto.sh ~/auto.sh
-mkdir -p ~/.config/autostart/
-echo '[Desktop Entry]
-Type=Application
-Name=automegadiskie
-Exec=/bin/sh ~/auto.sh
-StartupNotify=false
-Terminal=false
-' | tee ~/.config/autostart/automegadiskie.desktop
-
-echo '
-[Unit]
-Description=[My automegadiskie example task]
-
-[Service]
-Type=oneshot
-StandardOutput=journal
-ExecStart=/bin/sh ~/auto.sh
-
-[Install]
-WantedBy=default.target
-' | sudo tee /etc/systemd/system/automegadiskie.service
-
-
-exit 0
-
-
-
 #!/bin/sh
 sudo apt-get update
 sudo apt-get install -y udiskie
@@ -164,8 +134,32 @@ exec dwm
 
 
 #####################################################################################
+#AUTOSTART MEGADISKIE
+cp -v /media/"$USER"/1/y/y/u/installers/auto.sh ~/auto.sh
+mkdir -p ~/.config/autostart/
+echo '[Desktop Entry]
+Type=Application
+Name=automegadiskie
+Exec=/bin/sh ~/auto.sh
+StartupNotify=false
+Terminal=false
+' | tee ~/.config/autostart/automegadiskie.desktop
+
+echo '
+[Unit]
+Description=[My automegadiskie example task]
+
+[Service]
+Type=oneshot
+StandardOutput=journal
+ExecStart=/bin/sh ~/auto.sh
+
+[Install]
+WantedBy=default.target
+' | sudo tee /etc/systemd/system/automegadiskie.service
 
 
+#####################################################################################
 #r /etc/systemd/system/jdownloader.service
 echo '[Unit]
 Description=JDownloader Service
