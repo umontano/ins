@@ -1,4 +1,19 @@
 #!/bin/sh
+#uncommenting applicable entries in /etc/locale.gen, and running locale-gen
+#   For example, uncomment en_US.UTF-8 UTF-8 for American-English:
+#/etc/locale.gen
+sudo sed 's/# en_US\.UTF-8 UTF-8/en_US\.UTF-8 UTF-8/'  /etc/locale.gen -i
+sudo locale-gen
+#set the system locale, write the LANG variable to /etc/locale.conf, where en_US.UTF-8
+#   belongs to the first column of an uncommented entry in /etc/locale.gen:
+#/etc/locale.conf
+echo 'LANG=en_US.UTF-8
+' | sudo tee /etc/locale.conf
+#   Alternatively, run:
+sudo localectl set-locale LANG=en_US.UTF-8
+
+
+
 sudo apt-get update
 sudo apt-get install -y udiskie
 sleep 5
@@ -17,14 +32,8 @@ sudo apt-get install -y vim
 sudo apt-get install -y shellcheck
 sudo apt-get install -y kodi
 sudo apt-get install -y kodi-inputstream-adaptive libnss3
-sudo apt-get install -y lxterminal
 sudo apt-get install -y dillo
 sudo apt-get install -y midori
-#SUCKLESS
-#sudo apt-get install -y dwm
-#sudo apt-get install -y suckless-tools
-sudo apt-get install -y fontconfig
-sudo apt-get install -y xfonts-terminus
 sudo apt-get install -y raspberrypi-ui-mods
 #X11
 #sudo apt-get install -y xorg
@@ -46,6 +55,10 @@ sleep 5
 udiskie-mount -a
 sleep 5
 #####################################################################################
+#SUCKLESS
+#sudo apt-get install -y suckless-tools
+sudo apt-get install -y fontconfig
+sudo apt-get install -y xfonts-terminus
 #TO INSTALL SUCKLESS TERMINAL ST, #add Xlib.h
 sudo apt-get install -y libx11-dev
 sudo apt-get install -y libghc-x11-xft-dev
@@ -78,32 +91,29 @@ sleep 5
 sudo adduser "$USER" tty
 sudo adduser "$USER" video
 sudo adduser "$USER" bluetooth
-
+sleep 5s
 udiskie-mount -a
-sleep 5
-#sudo ln -sv /media/$USER/ /media/pi
-#sudo ln -sv /media/$USER/ /media/vv
-sudo ln -sv /media/$USER/1/ /a
-sudo ln -sv /media/$USER/K/ /k
-sudo ln -sv /media/$USER/K/ /b
+sleep 5s
+
+
 ln -sv /media/$USER/1/y/y/u/  ~/u
 ln -sv /media/$USER/1/y/y/p/  ~/p
-ln -sv /media/$USER/1/ /z/x
+sudo ln -sv /media/$USER/1/ /a
+sudo ln -sv /media/$USER/K/ /b
+sudo ln -sv /media/$USER/K/ /k
 sudo mkdir /z
 sudo chown "$USER":"$USER" /z
 sudo chmod -R 777 /z
 ln -sv /media/$USER/1/ /z/x
 ln -sv /media/$USER/1/ /z/a
 ln -sv /media/$USER/K/ /z/b
-ln -sv /media/$USER/ /z/m
 sudo chmod -R 777 /z
 
 
 
 #####################################################################################
-#sh ~/u/psdockerinstallmanualrasppi.sh
-#####################################################################################
 #DOCKER
+#sh ~/u/psdockerinstallmanualrasppi.sh
 cd $HOME
 vvvv=$(which docker) && echo "initiaized [[[ $vvvv ]]]" && \ 
 	if test -z $vvvv ; then 
@@ -114,7 +124,6 @@ vvvv=$(which docker) && echo "initiaized [[[ $vvvv ]]]" && \
 		echo DOCKER ALREADY INSTALLED AT $vvvv
 	fi
 
-############################################################
 ############################################################
 #X11 error only cosole user are allowed
 #You can add to
@@ -135,7 +144,63 @@ mv -v ~/.xinitrc ~/xinitrcBACKUP`date +%y%m%d%H%M%s`.txt
 echo '#!/bin/sh
 exec dwm
 ' | tee ~/.xinitrc
-############################################################
+
 
 #####################################################################################
-#r /home/$USER/.config/autostart/auto_w
+#AUTOSTART MEGADISKIE
+cp -v /media/"$USER"/1/y/y/u/installers/auto.sh ~/auto.sh
+mkdir -p ~/.config/autostart/
+echo '[Desktop Entry]
+Type=Application
+Name=automegadiskie
+Exec=/bin/sh ~/auto.sh
+StartupNotify=false
+Terminal=false
+' | tee ~/.config/autostart/automegadiskie.desktop
+
+echo '
+[Unit]
+Description=[My automegadiskie example task]
+
+[Service]
+Type=oneshot
+StandardOutput=journal
+ExecStart=/bin/sh ~/auto.sh
+
+[Install]
+WantedBy=default.target
+' | sudo tee /etc/systemd/system/automegadiskie.service
+
+
+#####################################################################################
+#r /etc/systemd/system/jdownloader.service
+echo '[Unit]
+Description=JDownloader Service
+After=network.target
+
+[Service]
+#Environment=JD_HOME=/opt/jdownloader
+Type=oneshot
+ExecStart=/usr/bin/java -Djava.awt.headless=true -jar /opt/jdownloader/JDownloader.jar
+#PID FILE FOR 2020 VERSION
+PIDFile=/opt/jdownloader/JDownloader.pid
+RemainAfterExit=yes
+User='$USER' 
+# Should be owner of /opt/jdownloader
+Group='$USER'   
+# Should be owner of /opt/jdownloader
+
+[Install]
+WantedBy=multi-user.target
+' | sudo tee /etc/systemd/system/jdownloader.service
+#sudo systemctl enable jdownloader.service &
+#####################################################################################
+sh ~/u/installers/qbittorrent-cli_install.sh
+sh ~/u/installers/psrpiMEGArepository.sh 
+sh ~/u/installers/rpibluealsa2022.sh
+sh ~/u/installers/rpipulseaudio.sh
+#####################################################################################
+sh ~/u/installers/cred.sh
+sh ~/u/installers/dotstow.sh
+#sh ~/u/installers/bluetoothconnect.sh
+sh ~/u/installers/jd.sh
