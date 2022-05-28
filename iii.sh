@@ -1,3 +1,21 @@
+echo '
+[Unit]
+Description=[My automegadiskie example task]
+
+[Service]
+Type=simple
+StandardOutput=journal
+ExecStart=~/auto.sh
+
+[Install]
+WantedBy=default.target
+' | sudo tee /etc/systemd/system/automegadiskie.service
+
+echo 0
+
+
+
+
 #!/bin/sh
 sudo apt-get update
 sudo apt-get install -y udiskie
@@ -146,6 +164,8 @@ Terminal=false
 
 
 #####################################################################################
+
+
 #r /etc/systemd/system/jdownloader.service
 echo '[Unit]
 Description=JDownloader Service
