@@ -1,11 +1,23 @@
+#####################################################################################
+#AUTOSTART MEGADISKIE
+cp -v /media/"$USER"/1/y/y/u/installers/auto.sh ~/auto.sh
+mkdir -p ~/.config/autostart/
+echo '[Desktop Entry]
+Type=Application
+Name=automegadiskie
+Exec=/bin/sh ~/auto.sh
+StartupNotify=false
+Terminal=false
+' | tee ~/.config/autostart/automegadiskie.desktop
+
 echo '
 [Unit]
 Description=[My automegadiskie example task]
 
 [Service]
-Type=simple
+Type=oneshot
 StandardOutput=journal
-ExecStart=~/auto.sh
+ExecStart=/bin/sh ~/auto.sh
 
 [Install]
 WantedBy=default.target
@@ -149,18 +161,6 @@ mv -v ~/.xinitrc ~/xinitrcBACKUP`date +%y%m%d%H%M%s`.txt
 echo '#!/bin/sh
 exec dwm
 ' | tee ~/.xinitrc
-
-#####################################################################################
-#AUTOSTART MEGADISKIE
-cp -v /media/"$USER"/1/y/y/u/installers/auto.sh ~/auto.sh
-mkdir -p ~/.config/autostart/
-echo '[Desktop Entry]
-Type=Application
-Name=automegadiskie
-Exec=~/auto.sh
-StartupNotify=false
-Terminal=false
-' | tee ~/.config/autostart/automegadiskie.desktop
 
 
 #####################################################################################
