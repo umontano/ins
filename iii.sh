@@ -2,11 +2,7 @@
 #uncommenting applicable entries in /etc/locale.gen, and running locale-gen
 #   For example, uncomment en_US.UTF-8 UTF-8 for American-English:
 #/etc/locale.gen
-<<<<<<< HEAD
 sudo sed 's/# en_US\.UTF-8 UTF-8/en_US\.UTF-8 UTF-8/'  /etc/locale.gen -i
-=======
-sudo sed 's/# en_US\.UTF-8 UTF-8/en_US\.UTF-8 UTF-8/g' -i  /etc/locale.gen
->>>>>>> a881cf5dd8f52b910ba54d84957d07c50f2771cc
 sudo locale-gen
 #set the system locale, write the LANG variable to /etc/locale.conf, where en_US.UTF-8
 #   belongs to the first column of an uncommented entry in /etc/locale.gen:
@@ -15,11 +11,6 @@ echo 'LANG=en_US.UTF-8
 ' | sudo tee /etc/locale.conf
 #   Alternatively, run:
 sudo localectl set-locale LANG=en_US.UTF-8
-<<<<<<< HEAD
-=======
-exit 0
-
->>>>>>> a881cf5dd8f52b910ba54d84957d07c50f2771cc
 
 
 
