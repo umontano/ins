@@ -1,3 +1,18 @@
+#####################################################################################
+#AUTOSTART MEGADISKIE
+cp -v /media/"$USER"/1/y/y/u/installers/auto.sh ~/auto.sh
+mkdir -p ~/.config/autostart/
+echo '[Desktop Entry]
+Type=Application
+Name=automegadiskie
+Exec=~/auto.sh
+StartupNotify=false
+Terminal=false
+' | tee ~/.config/autostart/automegadiskie.desktop
+
+exit 0
+
+
 #!/bin/sh
 sudo apt-get update
 sudo apt-get install -y udiskie
@@ -78,32 +93,29 @@ sleep 5
 sudo adduser "$USER" tty
 sudo adduser "$USER" video
 sudo adduser "$USER" bluetooth
-
+sleep 5s
 udiskie-mount -a
-sleep 5
-#sudo ln -sv /media/$USER/ /media/pi
-#sudo ln -sv /media/$USER/ /media/vv
-sudo ln -sv /media/$USER/1/ /a
-sudo ln -sv /media/$USER/K/ /k
-sudo ln -sv /media/$USER/K/ /b
+sleep 5s
+
+
 ln -sv /media/$USER/1/y/y/u/  ~/u
 ln -sv /media/$USER/1/y/y/p/  ~/p
-ln -sv /media/$USER/1/ /z/x
+sudo ln -sv /media/$USER/1/ /a
+sudo ln -sv /media/$USER/K/ /b
+sudo ln -sv /media/$USER/K/ /k
 sudo mkdir /z
 sudo chown "$USER":"$USER" /z
 sudo chmod -R 777 /z
 ln -sv /media/$USER/1/ /z/x
 ln -sv /media/$USER/1/ /z/a
 ln -sv /media/$USER/K/ /z/b
-ln -sv /media/$USER/ /z/m
 sudo chmod -R 777 /z
 
 
 
 #####################################################################################
-#sh ~/u/psdockerinstallmanualrasppi.sh
-#####################################################################################
 #DOCKER
+#sh ~/u/psdockerinstallmanualrasppi.sh
 cd $HOME
 vvvv=$(which docker) && echo "initiaized [[[ $vvvv ]]]" && \ 
 	if test -z $vvvv ; then 
@@ -114,7 +126,6 @@ vvvv=$(which docker) && echo "initiaized [[[ $vvvv ]]]" && \
 		echo DOCKER ALREADY INSTALLED AT $vvvv
 	fi
 
-############################################################
 ############################################################
 #X11 error only cosole user are allowed
 #You can add to
@@ -135,7 +146,37 @@ mv -v ~/.xinitrc ~/xinitrcBACKUP`date +%y%m%d%H%M%s`.txt
 echo '#!/bin/sh
 exec dwm
 ' | tee ~/.xinitrc
-############################################################
+
 
 #####################################################################################
-#r /home/$USER/.config/autostart/auto_w
+#r /etc/systemd/system/jdownloader.service
+echo '[Unit]
+Description=JDownloader Service
+After=network.target
+
+[Service]
+#Environment=JD_HOME=/opt/jdownloader
+Type=oneshot
+ExecStart=/usr/bin/java -Djava.awt.headless=true -jar /opt/jdownloader/JDownloader.jar
+#PID FILE FOR 2020 VERSION
+PIDFile=/opt/jdownloader/JDownloader.pid
+RemainAfterExit=yes
+User='$USER' 
+# Should be owner of /opt/jdownloader
+Group='$USER'   
+# Should be owner of /opt/jdownloader
+
+[Install]
+WantedBy=multi-user.target
+' | sudo tee /etc/systemd/system/jdownloader.service
+#sudo systemctl enable jdownloader.service &
+#####################################################################################
+sh ~/u/installers/qbittorrent-cli_install.sh
+sh ~/u/installers/psrpiMEGArepository.sh 
+sh ~/u/installers/rpibluealsa2022.sh
+sh ~/u/installers/rpipulseaudio.sh
+#####################################################################################
+sh ~/u/installers/cred.sh
+sh ~/u/installers/dotstow.sh
+sh ~/u/installers/bluetoothconnect.sh
+sh ~/u/installers/jd.sh
