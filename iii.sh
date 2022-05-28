@@ -1,18 +1,3 @@
-#####################################################################################
-#AUTOSTART MEGADISKIE
-cp -v /media/"$USER"/1/y/y/u/installers/auto.sh ~/auto.sh
-mkdir -p ~/.config/autostart/
-echo '[Desktop Entry]
-Type=Application
-Name=automegadiskie
-Exec=~/auto.sh
-StartupNotify=false
-Terminal=false
-' | tee ~/.config/autostart/automegadiskie.desktop
-
-exit 0
-
-
 #!/bin/sh
 sudo apt-get update
 sudo apt-get install -y udiskie
@@ -146,6 +131,18 @@ mv -v ~/.xinitrc ~/xinitrcBACKUP`date +%y%m%d%H%M%s`.txt
 echo '#!/bin/sh
 exec dwm
 ' | tee ~/.xinitrc
+
+#####################################################################################
+#AUTOSTART MEGADISKIE
+cp -v /media/"$USER"/1/y/y/u/installers/auto.sh ~/auto.sh
+mkdir -p ~/.config/autostart/
+echo '[Desktop Entry]
+Type=Application
+Name=automegadiskie
+Exec=~/auto.sh
+StartupNotify=false
+Terminal=false
+' | tee ~/.config/autostart/automegadiskie.desktop
 
 
 #####################################################################################
