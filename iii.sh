@@ -173,26 +173,17 @@ WantedBy=default.target
 
 
 #####################################################################################
-#r /etc/systemd/system/jdownloader.service
-echo '[Unit]
-Description=JDownloader Service
-After=network.target
+#SYSTEMD SERVICE UNIT EXAMPLE
+echo '
+[Unit]
+Description=Foo
 
 [Service]
-#Environment=JD_HOME=/opt/jdownloader
-Type=oneshot
-ExecStart=/usr/bin/java -Djava.awt.headless=true -jar /opt/jdownloader/JDownloader.jar
-#PID FILE FOR 2020 VERSION
-PIDFile=/opt/jdownloader/JDownloader.pid
-RemainAfterExit=yes
-User='$USER' 
-# Should be owner of /opt/jdownloader
-Group='$USER'   
-# Should be owner of /opt/jdownloader
+ExecStart=/usr/sbin/foo-daemon
 
 [Install]
 WantedBy=multi-user.target
-' | sudo tee /etc/systemd/system/jdownloader.service
+'
 #sudo systemctl enable jdownloader.service &
 #####################################################################################
 sh ~/u/installers/qbittorrent-cli_install.sh
