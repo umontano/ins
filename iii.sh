@@ -160,15 +160,14 @@ Terminal=false
 
 echo '
 [Unit]
-Description=[My automegadiskie example task]
+Description=automegadiskie
 
 [Service]
 Type=oneshot
-StandardOutput=journal
 ExecStart=/bin/sh ~/auto.sh
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
 ' | sudo tee /etc/systemd/system/automegadiskie.service
 
 
